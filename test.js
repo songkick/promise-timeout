@@ -84,7 +84,7 @@ tap.test('above delay async resolution', function(t){
     .catch(function(error){
       t.ok(error instanceof timeoutPromise.TimeoutError);
       t.equal(error.fn, asynchronousResolve);
-      t.equal(error.delay, 1 * tick);
+      t.equal(error.settings.delay, 1 * tick, 'it did not return the delay setting');
       t.equal(error.message, 'Initial promise resolution timed out');
     });
 });
@@ -111,7 +111,7 @@ tap.test('above delay async rejection', function(t){
     .catch(function(error){
       t.ok(error instanceof timeoutPromise.TimeoutError);
       t.equal(error.fn, asynchronousReject);
-      t.equal(error.delay, 1 * tick);
+      t.equal(error.settings.delay, 1 * tick, 'it did not return the delay setting');
       t.equal(error.message, 'Initial promise resolution timed out');
     });
 });

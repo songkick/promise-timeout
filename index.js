@@ -30,7 +30,7 @@ module.exports = function(settings){
 
 var TimeoutError = module.exports.TimeoutError = function(settings, fn){
   this.message = 'Initial promise resolution timed out';
-  this.delay = settings.delay;
+  this.settings = settings;
   this.fn = fn;
 };
 TimeoutError.prototype = Object.create(Error.prototype);

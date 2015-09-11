@@ -16,7 +16,9 @@ boundToReject().then(function(result){
   // err instanceof timeoutPromise.TimeoutError === true
   // err === {
   //   message: 'Promise resolution timed out',
-  //   delay: 100,
+  //   settings: {
+  //    delay: 100
+  //   },
   //   fn: resolvesAfter200
   // }
 });
@@ -36,3 +38,9 @@ function resolvesAfter200() {
 ## Options
 
 `delay`: the delay before the promise gets rejected
+
+## See also
+
+`promise-timeout` composes really well with the following promise helper:
+
+* [`promise-retry`](https://github.com/songkick/promise-retry):

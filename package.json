@@ -1,6 +1,6 @@
 {
   "name": "promise-timeout",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Reject a promise if it does not resolve before specified delay",
   "main": "index.js",
   "scripts": {
