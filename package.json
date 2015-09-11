@@ -1,0 +1,27 @@
+{
+  "name": "promise-timeout",
+  "version": "0.0.0",
+  "description": "Reject a promise if it does not resolve before specified delay",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/songkick/promise-timeout.git"
+  },
+  "keywords": [
+    "promise",
+    "timeout",
+    "delay"
+  ],
+  "author": "Arnaud Rinquin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/songkick/promise-timeout/issues"
+  },
+  "homepage": "https://github.com/songkick/promise-timeout#readme",
+  "devDependencies": {
+    "tap": "^1.4.1"
+  }
+}
