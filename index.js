@@ -1,36 +1,50 @@
-module.exports = function(settings){
-  return function(fn){
-    return function(){
-      return new Promise(function(resolve, reject) {
+var factory = function (createExecutor) {
+    return function (settings) {
+        return function (fn) {
+            return function () {
+                return new Promise(createExecutor(fn, settings));
+            };
+        };
+    }
+};
 
+var promiseTimeout = factory(function (fn, settings) {
+
+    settings = settings || {};
+    settings.delay = parseInt(settings.delay, 10) || 0;
+
+    function executor(resolve, reject) {
         var hasAlreadyCalledBack = false;
 
-        function generateCallback(callback){
-          return function callbackUnlessAlreadyDone(payload){
-            clearTimeout(timeout);
-            if (!hasAlreadyCalledBack) {
-              hasAlreadyCalledBack = true;
-              callback(payload);
+        function generateCallback(callback) {
+            return function callbackUnlessAlreadyDone(payload) {
+                clearTimeout(timeout);
+                if (!hasAlreadyCalledBack) {
+                    hasAlreadyCalledBack = true;
+                    callback(payload);
+                }
             }
-          }
         }
 
-        var originalPromise = fn();
+        // original promise
+        fn().then(generateCallback(resolve))
+            .catch(generateCallback(reject));
 
-        originalPromise.then(generateCallback(resolve));
-        originalPromise.catch(generateCallback(reject));
-
-        var timeout = setTimeout(function(){
-          generateCallback(reject)(new TimeoutError(settings, fn));
+        var timeout = setTimeout(function () {
+            generateCallback(reject)(new TimeoutError(settings, fn));
         }, settings.delay);
-      })
     }
-  }
-}
 
-var TimeoutError = module.exports.TimeoutError = function(settings, fn){
-  this.message = 'Initial promise resolution timed out';
-  this.settings = settings;
-  this.fn = fn;
+    return executor;
+});
+
+var TimeoutError = function (settings, fn) {
+    this.message = 'Initial promise resolution timed out';
+    this.settings = settings;
+    this.fn = fn;
 };
 TimeoutError.prototype = Object.create(Error.prototype);
+
+promiseTimeout.TimeoutError = TimeoutError;
+
+module.exports = promiseTimeout;
