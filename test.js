@@ -115,3 +115,31 @@ tap.test('above delay async rejection', function (t) {
             t.equal(error.message, 'Initial promise resolution timed out');
         });
 });
+
+tap.test('default delay is 0ms', function(t){
+    t.plan(2);
+
+    function syncResolve() {
+        return Promise.resolve('yaySync');
+    };
+
+    function asyncResolve() {
+        return new Promise(function(resolve, reject) {
+            setTimeout(function(){
+                resolve('yayAsync');
+            }, 10);
+        });
+    }
+
+    timeoutPromise({delay:null})(syncResolve)().catch(function(){
+        t.bailout('promise was rejected while it should have resolved immediatly');
+    }).then(function(response){
+        t.ok(response);
+    });
+
+    timeoutPromise({delay:null})(asyncResolve)().then(function(){
+        t.bailout('promise was resolve while it should have rejected immediatly');
+    }).catch(function(error){
+        t.ok(error);
+    });
+});
