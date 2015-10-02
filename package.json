@@ -4,7 +4,7 @@
   "description": "Reject a promise if it does not resolve before specified delay",
   "main": "index.js",
   "scripts": {
-    "test": "tap test.js"
+    "test": "tap test.js --cov"
   },
   "repository": {
     "type": "git",
