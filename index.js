@@ -5,8 +5,15 @@ var factory = function (createExecutor) {
                 return new Promise(createExecutor(fn, settings));
             };
         };
-    }
+    };
 };
+
+var TimeoutError = function (settings, fn) {
+    this.message = 'Initial promise resolution timed out';
+    this.settings = settings;
+    this.fn = fn;
+};
+TimeoutError.prototype = Object.create(Error.prototype);
 
 var promiseTimeout = factory(function (fn, settings) {
 
@@ -23,7 +30,7 @@ var promiseTimeout = factory(function (fn, settings) {
                     hasAlreadyCalledBack = true;
                     callback(payload);
                 }
-            }
+            };
         }
 
         // original promise
@@ -37,13 +44,6 @@ var promiseTimeout = factory(function (fn, settings) {
 
     return executor;
 });
-
-var TimeoutError = function (settings, fn) {
-    this.message = 'Initial promise resolution timed out';
-    this.settings = settings;
-    this.fn = fn;
-};
-TimeoutError.prototype = Object.create(Error.prototype);
 
 promiseTimeout.TimeoutError = TimeoutError;
 
