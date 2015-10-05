@@ -1,4 +1,4 @@
-# promise-timeout [![Build Status](https://travis-ci.org/songkick/promise-timeout.svg)](https://travis-ci.org/songkick/promise-timeout)
+# promise-timeout [![Build Status](https://travis-ci.org/songkick/promise-timeout.svg)](https://travis-ci.org/songkick/promise-timeout) [![Code Climate](https://codeclimate.com/github/songkick/promise-timeout/badges/gpa.svg)](https://codeclimate.com/github/songkick/promise-timeout) [![Test Coverage](https://codeclimate.com/github/songkick/promise-timeout/badges/coverage.svg)](https://codeclimate.com/github/songkick/promise-timeout/coverage)
 
 Reject a promise if it does not resolve before specified delay
 
