@@ -1,5 +1,5 @@
 {
-  "name": "promise-timeout",
+  "name": "@songkick/promise-timeout",
   "version": "1.0.0",
   "description": "Reject a promise if it does not resolve before specified delay",
   "main": "index.js",
@@ -25,5 +25,6 @@
   "devDependencies": {
     "codeclimate-test-reporter": "^0.1.1",
     "tap": "^1.4.1"
-  }
+  },
+  "dependencies": {}
 }
