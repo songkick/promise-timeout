@@ -3,7 +3,7 @@
 Reject a promise if it does not resolve before specified delay
 
 ```js
-var timeoutPromise = require('promise-timeout');
+var timeoutPromise = require('@songkick/promise-timeout');
 
 var hundredMilTimeout = timeoutPromise({delay: 100 });
 var boundToReject = hundredMilTimeout(resolvesAfter200);
